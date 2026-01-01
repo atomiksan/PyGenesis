@@ -33,9 +33,12 @@ sed -i "s/import $OLD_NAME/import $NEW_NAME/" tests/test_basic.py
 sed -i "s/assert $OLD_NAME/assert $NEW_NAME/" tests/test_basic.py
 echo "✅ Updated tests"
 
-# 4. Update Import in main.py (if it self-references, though our code uses relative or direct string)
-sed -i "s/\"$OLD_NAME.main:app\"/\"$NEW_NAME.main:app\"/" "src/$NEW_NAME/main.py"
-echo "✅ Updated main.py entry point string"
+# 4. Update main.py references
+# Update the metadata package name
+sed -i "s/metadata(\"$OLD_NAME_DASH\")/metadata(\"$NEW_NAME\")/" "src/$NEW_NAME/main.py"
+# Update the uvicorn module path
+sed -i "s/src\.$OLD_NAME\.main:app/src.$NEW_NAME.main:app/" "src/$NEW_NAME/main.py"
+echo "✅ Updated main.py"
 
 # 5. Clean up old locks and venv to ensure fresh start
 rm -rf .venv uv.lock
@@ -43,9 +46,9 @@ echo "🗑️  Cleaned up old environment"
 
 # 6. Re-generate lock and install
 echo "📦 Generating new uv.lock..."
-nix develop --command uv pip compile pyproject.toml -o uv.lock
+nix develop --command uv lock
 echo "📦 Installing dependencies..."
-nix develop --command uv pip install -e .[dev]
+nix develop --command uv sync --all-extras
 
 # 7. Reset Git
 rm -rf .git

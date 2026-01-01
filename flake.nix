@@ -36,17 +36,11 @@
             echo "Python: $(python --version)"
             echo "UV: $(uv --version)"
 
-            # Ensure venv exists and is up to date
-            if [ ! -d ".venv" ]; then
-                echo "Creating virtual environment..."
-                uv venv
-            fi
+            # Sync all dependencies including dev extras
+            uv sync --all-extras
             
-            # Activate venv
+            # Activate venv for non-uv commands
             source .venv/bin/activate
-            
-            # auto-install dependencies if pyproject.toml changes
-            uv pip install -e .
           '';
         };
       }
