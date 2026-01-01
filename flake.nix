@@ -19,6 +19,17 @@
           ];
 
           shellHook = ''
+            echo -e "\e[32m"
+            echo "  _______     _   _ _            _____               _ "
+            echo " |  __ \ \   / / | \ | |(_)       / ____|             | |"
+            echo " | |__) \ \_/ /  |  \| | ___  __ | (___   ___  ___  __| |"
+            echo " |  ___/ \   /   | . \` |/ | \/ /  \___ \ / _ \/ _ \/ _\` |"
+            echo " | |      | |    | |\  | || >  <   ____) |  __/  __/ (_| |"
+            echo " |_|      |_|    |_| \_|_||_/_/\_\ |_____/ \___|\___|\__,_|"
+            echo "                                                           "
+            echo "              🚀 Python + Nix + UV Skeleton 🚀             "
+            echo -e "\e[0m"
+
             echo "Python UV environment loaded."
             echo "Python: $(python --version)"
             echo "UV: $(uv --version)"

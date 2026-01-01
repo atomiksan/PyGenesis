@@ -1,4 +1,4 @@
-# Python Nix Skeleton 🐍❄️
+# PyNix-Seed 🌱
 
 A robust, reproducible Python project skeleton using **Nix**, **UV**, and **Direnv**.
 
