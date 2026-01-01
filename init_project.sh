@@ -37,7 +37,7 @@ echo "✅ Updated tests"
 # Update the metadata package name
 sed -i "s/metadata(\"$OLD_NAME_DASH\")/metadata(\"$NEW_NAME\")/" "src/$NEW_NAME/main.py"
 # Update the uvicorn module path
-sed -i "s/src\.$OLD_NAME\.main:app/src.$NEW_NAME.main:app/" "src/$NEW_NAME/main.py"
+sed -i "s/$OLD_NAME\.main:app/$NEW_NAME.main:app/" "src/$NEW_NAME/main.py"
 echo "✅ Updated main.py"
 
 # 5. Clean up old locks and venv to ensure fresh start
