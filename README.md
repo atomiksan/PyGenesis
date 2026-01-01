@@ -1,4 +1,4 @@
-# PyNix-Seed 🌱
+# PyGenesis ⚛️
 
 A robust, reproducible Python project skeleton using **Nix**, **UV**, and **Direnv**.
 
