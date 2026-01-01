@@ -2,110 +2,82 @@
 
 A robust, reproducible Python project skeleton using **Nix**, **UV**, and **Direnv**.
 
-## 🚀 Features
+## 🚀 Instant Start
 
-*   **Reproducible Environment**: Nix guarantees `python` and `uv` versions.
-*   **Fast Dependencies**: UV manages PyPI packages instantly.
-*   **Automated Shell**: Direnv activates the environment automatically.
-*   **FastAPI Ready**: Includes a "Hello World" app out of the box.
+Follow these exact steps to create and run your new project.
 
----
-
-## ⚡ Quick Start (Try It Now!)
+### 1. Create New Project
+Clone this skeleton and run the setup script. Replace `my_app` with your desired project name (use underscores).
 
 ```bash
-# 1. Clone the repository
-git clone git@github.com:atomiksan/PyGenesis.git
-cd PyGenesis
+# Clone the repository
+git clone git@github.com:atomiksan/PyGenesis.git my_app
+cd my_app
 
-# 2. Enter the Nix environment (installs everything automatically)
+# Run initialization (renames project, installs dependencies)
+./init_project.sh my_app
+```
+
+### 2. Enter Environment
+Activate the Nix environment. This guarantees you have the correct Python and tools.
+
+```bash
 nix develop
+```
+*(Note: If you use `direnv`, just run `direnv allow`)*
 
-# 3. Run the server
+### 3. Run Server
+Start the development server.
+
+```bash
 start-server
-
-# 4. Visit http://localhost:8000 → You should see:
-#    {"message": "Hello my_project! Your PyGenesis skeleton is working!"}
 ```
+
+You should see:
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+```
+
+### 4. Verify
+Open http://localhost:8000 in your browser.
+You'll see: `{"message": "Hello my_app! Your PyGenesis skeleton is working!"}`
+
+### 5. Stop Server
+To stop the server, press **`Ctrl + C`** in your terminal.
 
 ---
 
-## 🛠️ Create Your Own Project
+## 💻 Daily Workflow
 
-1.  **Clone this template**:
-    ```bash
-    git clone git@github.com:atomiksan/PyGenesis.git my-awesome-app
-    cd my-awesome-app
-    ```
-
-2.  **Run the initialization script**:
-    ```bash
-    ./init_project.sh my_awesome_app
-    ```
-    > **Note**: Use underscores for Python package names (e.g., `my_awesome_app` not `my-awesome-app`)
-
-    This will:
-    *   Rename the source package to `my_awesome_app`
-    *   Update `pyproject.toml` with your project name
-    *   Reset Git history for a fresh start
-    *   Install all dependencies
-
-3.  **Verify it works**:
-    ```bash
-    nix develop
-    start-server
-    # Visit http://localhost:8000 → Should show: "Hello my_awesome_app!"
-    ```
-
----
-
-## 💻 Development Workflow
-
-### Enter Environment
+**Start Developing**:
 ```bash
-direnv allow          # If using direnv (recommended)
-# OR
-nix develop           # Manual entry
+nix develop       # Enter environment
+start-server      # Run app
 ```
 
-### Run Dev Server
+**Run Tests**:
 ```bash
-start-server          # Uses uvicorn with auto-reload
+pytest
 ```
 
-### Run Tests
+**Add New Dependency**:
 ```bash
-pytest                # Runs all tests
-```
-
-### Add Dependencies
-Edit `pyproject.toml`, then:
-```bash
-uv lock               # Update lockfile
-uv sync --all-extras  # Install new dependencies
+# 1. Add package name to pyproject.toml
+# 2. Run:
+uv lock
+uv sync --all-extras
 ```
 
 ---
 
 ## 🏗️ Project Structure
-
 ```
 .
-├── flake.nix         # Nix environment definition
-├── pyproject.toml    # Python dependencies & project config
+├── flake.nix         # System environment (Python + Tools)
+├── pyproject.toml    # Python dependencies
 ├── src/
-│   └── my_project/   # Your source code (renamed by init_project.sh)
+│   └── my_app/       # Your source code (renamed)
 │       ├── __init__.py
-│       └── main.py   # FastAPI application
-└── tests/            # Test files
+│       └── main.py   # FastAPI app
+└── tests/            # Tests
 ```
-
----
-
-## ❓ FAQ
-
-**Why Nix + UV?**  
-Nix gives us a rock-solid system foundation (glibc, openssl, python version). UV gives us instant, cached resolution of Python libraries. It's the best of both worlds for development speed.
-
-**Why underscores in project names?**  
-Python package names must be valid identifiers. Use `my_project` not `my-project`.
