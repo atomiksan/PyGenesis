@@ -51,14 +51,21 @@ To stop the server, press **`Ctrl + C`** in your terminal.
 
 **Start Developing**:
 ```bash
-nix develop       # Enter environment
-start-server      # Run app
+just dev          # Run app with reload
 ```
+
 
 **Run Tests**:
 ```bash
-pytest
+just test
 ```
+
+**Format & Lint**:
+```bash
+just format       # Auto-format code
+just lint         # Check code style
+```
+
 
 **Add New Dependency**:
 ```bash
@@ -67,6 +74,32 @@ pytest
 uv lock
 uv sync --all-extras
 ```
+
+---
+
+## 🛠️ Developer Tools
+
+### ⚡ Justfile (Task Runner)
+We use `just` to simplify common commands. Run `just --list` to see all available tasks.
+- `just dev`: Runs the dev server.
+- `just test`: Runs pytest.
+- `just lint`: Runs ruff and black checks.
+- `just format`: Auto-formats code with ruff and black.
+- `just clean`: Cleans up artifacts.
+
+### 🐳 Docker Support
+A production-ready `Dockerfile` is included.
+```bash
+docker build -t my_app .
+docker run -p 8000:8000 my_app
+```
+
+### ✅ Git Hooks (Pre-commit)
+Pre-commit hooks are configured to ensure code quality.
+```bash
+nix develop --command pre-commit install
+```
+This will run linting and formatting on every commit.
 
 ---
 

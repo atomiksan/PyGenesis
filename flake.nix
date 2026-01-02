@@ -16,6 +16,7 @@
           packages = [
             pkgs.uv
             pkgs.python311
+            pkgs.just
           ];
 
           shellHook = ''

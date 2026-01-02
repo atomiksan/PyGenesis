@@ -59,4 +59,5 @@ echo "git init"
 
 echo "🎉 Project $NEW_NAME is ready!"
 echo "👉 Run 'nix develop' or 'direnv allow' to enter."
-echo "👉 Run 'start-server' to launch the app."
+echo "👉 Run 'just dev' to launch the app."
+echo "👉 Run 'just --list' to see all available commands."
