@@ -6,8 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -16,6 +22,7 @@
           packages = [
             pkgs.uv
             pkgs.python311
+            pkgs.pyright
             pkgs.just
           ];
 
@@ -30,7 +37,7 @@
             echo "         __/ |                                      "
             echo "        |___/                                       "
             echo "                                                    "
-            echo "              🚀 Python + Nix + UV Skeleton 🚀      "
+            echo "        🚀 Python + Nix + UV Skeleton  🚀           "
             echo -e "\e[0m"
 
             echo "Python UV environment loaded."
@@ -39,7 +46,7 @@
 
             # Sync all dependencies including dev extras
             uv sync --all-extras
-            
+
             # Activate venv for non-uv commands
             source .venv/bin/activate
           '';
