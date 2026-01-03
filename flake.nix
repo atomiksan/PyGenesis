@@ -24,6 +24,9 @@
             pkgs.python311
             pkgs.pyright
             pkgs.just
+            pkgs.black
+            pkgs.ruff
+            pkgs.isort
           ];
 
           shellHook = ''
